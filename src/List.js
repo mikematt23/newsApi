@@ -67,6 +67,7 @@ class List extends React.Component{
     })
     console.log(this.state.searchBy)
   }
+
   Author = (e)=>{
     
     this.setState({
@@ -74,6 +75,8 @@ class List extends React.Component{
     })
     console.log(this.state.searchBy)
   }
+
+
   Date = (e)=>{
     
     this.setState({
@@ -128,7 +131,7 @@ class List extends React.Component{
           {
              this.state.searchHits.map((hit,index)=>{
                return(
-                 <Search  hit = {hit} index ={index}/>
+                 <Search key ={index}  hit = {hit} index ={index}/>
                )
              })
           }
