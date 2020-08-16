@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import List from './List'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+class App extends React.Component{
+  constructor(props){
+    super(props)
+    this.state ={
+      stories : []
+    }
+  }
+
+  componentDidMount() {
+    fetch('https://hn.algolia.com/api/v1/search?tags=front_page')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.hits)
+            this.setState({
+              stories : [...data.hits]
+            })
+        })
+  }
+  
+  render(){
+    return(
+    <div className = 'style'>
+      <List  stories = {this.state.stories}/>
     </div>
-  );
+    )
+  }
 }
 
 export default App;
